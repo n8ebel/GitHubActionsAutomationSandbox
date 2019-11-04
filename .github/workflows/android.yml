@@ -18,3 +18,16 @@ jobs:
     
     - name: Build & Test Project
       run: ./gradlew assemble check dependencyUpdates --stacktrace
+
+    - name: Install Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+    - name: Install Bundler
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+    - name: Run Danger
+      run: bundle exec danger
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
