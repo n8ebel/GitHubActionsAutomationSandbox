@@ -20,9 +20,9 @@ jobs:
       run: ./gradlew assemble check dependencyUpdates --stacktrace
 
     - name: Install Ruby
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: '2.6'
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.6'
     - name: Install Bundler
       run: |
         gem install bundler
