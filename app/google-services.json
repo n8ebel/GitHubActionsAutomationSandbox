@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "948142305506",
+    "firebase_url": "https://githubactionsautomationsandbox.firebaseio.com",
+    "project_id": "githubactionsautomationsandbox",
+    "storage_bucket": "githubactionsautomationsandbox.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948142305506:android:22e3bde89b22b04f7faebb",
+        "android_client_info": {
+          "package_name": "com.n8ebel.githubactionsautomationsandbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "948142305506-de2bsv4n33fmat8adealunstvoqeku5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBshtQ1C8G7F-tyl4O5baz0wL24DKLTn2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "948142305506-de2bsv4n33fmat8adealunstvoqeku5h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
