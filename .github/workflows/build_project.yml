@@ -19,6 +19,9 @@ jobs:
     - name: Check Kotlin Formatting
       run: ./gradlew ktlintCheck --continue
 
+    - name: Build & Test Project
+      run: ./gradlew assemble
+
     - name: Install Ruby
       uses: actions/setup-ruby@v1
       with:
