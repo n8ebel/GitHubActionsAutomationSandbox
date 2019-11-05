@@ -15,7 +15,10 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    
+
+    - name: Check Kotlin Formatting
+      run: ./gradlew ktlintCheck --continue
+
     - name: Build & Test Project
       run: ./gradlew assemble check dependencyUpdates --stacktrace
 
