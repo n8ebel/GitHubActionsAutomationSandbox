@@ -16,11 +16,20 @@ jobs:
       with:
         java-version: 1.8
 
+    - name: Download Dependencies
+      run: ./gradlew androidDependencies
+
+    - name: Check Dependency Versions
+      run: ./gradlew dependencyUpdates
+
     - name: Check Kotlin Formatting
       run: ./gradlew ktlintCheck --continue
 
+    - name: Run Tests
+      run: ./gradlew test
+
     - name: Build & Test Project
-      run: ./gradlew assemble check dependencyUpdates --stacktrace
+      run: ./gradlew assemble --continue
 
     - name: Install Ruby
       uses: actions/setup-ruby@v1
