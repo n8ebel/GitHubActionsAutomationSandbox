@@ -1,7 +1,7 @@
 Example repo demonstrating different types of automated tasks and CI integrations
 
 ## Examples Included
-- Simple CircleCI configuration
+- Simple GitHub Actions build configuration
 - ktlint running in CI
 - Gradle task to copy a pre-push git hook that validates ktlint
 - .gitignore file which allows code styles, scopes, templates, etc to be tracked
@@ -12,6 +12,7 @@ Example repo demonstrating different types of automated tasks and CI integration
 - Danger integration to thank PR author
 - Danger integration to add inline ktlint issue comments
 - Danger integration to warn about missing PR description
+- GitHub Actions workflow to check for dependency updates every day at 8:00
 
 
 ## Resources
