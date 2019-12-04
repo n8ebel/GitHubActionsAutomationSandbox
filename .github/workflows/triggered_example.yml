@@ -1,0 +1,14 @@
+name: Check Dependency Versions
+
+on:
+  schedule:
+    - cron:  '*/5 * * * *'
+
+jobs:
+  build:
+    name: Run Some Scheduled Thing
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Do Something
+        run: echo Doing Something...
