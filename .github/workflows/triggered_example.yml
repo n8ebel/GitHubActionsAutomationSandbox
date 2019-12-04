@@ -1,4 +1,4 @@
-name: Check Dependency Versions
+name: Do Something That Needs Scheduled
 
 on:
   schedule:
