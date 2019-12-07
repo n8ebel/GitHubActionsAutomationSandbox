@@ -1,0 +1,19 @@
+name: Triggered Tasks
+
+on:
+  repository_dispatch:
+
+jobs:
+  build:
+    name: Check Dependencies & Tests
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Check Dependency Versions
+        run: ./gradlew dependencyUpdates
+
+      - name: Run Tests
+        run: ./gradlew test
