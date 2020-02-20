@@ -1,5 +1,6 @@
 Example repo demonstrating different types of automated tasks and CI integrations
 
+
 ## Examples Included
 - Simple GitHub Actions build configuration
 - ktlint running in CI
@@ -13,6 +14,7 @@ Example repo demonstrating different types of automated tasks and CI integration
 - Danger integration to add inline ktlint issue comments
 - Danger integration to warn about missing PR description
 - GitHub Actions workflow to check for dependency updates every day at 8:00
+
 
 
 ## Resources
