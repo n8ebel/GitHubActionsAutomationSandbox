@@ -29,7 +29,7 @@ allprojects {
     ktlint {
         version = "0.30.0"
         android = true
-        ignoreFailures = false
+        ignoreFailures = true
         reporters = [ReporterType.PLAIN, ReporterType.CHECKSTYLE]
 
         filter {
