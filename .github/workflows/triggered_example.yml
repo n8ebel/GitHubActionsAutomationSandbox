@@ -4,7 +4,8 @@ on:
   repository_dispatch:
     types: do-something
   schedule:
-    - cron:  '*/5 * * * *'
+    - cron: '*/5 * * * *'
+    - cron: '0 6 * * Tue expr `date +\%s` / 604800 \% 2 >/dev/null`
 
 jobs:
   build:
