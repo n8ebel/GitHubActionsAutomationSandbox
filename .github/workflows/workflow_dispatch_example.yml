@@ -1,0 +1,21 @@
+name: Manually Triggered Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      input1:
+        description: 'The first input'
+        required: true
+        default: 'A default value'
+      input2:
+        description: 'The second input'
+        required: false
+
+jobs:
+  job1:
+    name: Run Some Manually Triggered Tasks
+    runs-on: ubuntu-latest
+    steps:
+
+      - run: 'echo "Triggered event input1: ${{ github.event.client_payload.input1 }}"'
+      - run: 'echo "Triggered event input2: ${{ github.event.client_payload.input2 }}"'
