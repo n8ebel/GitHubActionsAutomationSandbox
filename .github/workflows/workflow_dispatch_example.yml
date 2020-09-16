@@ -2,6 +2,8 @@ name: Manually Triggered Workflow
 
 on:
   workflow_dispatch:
+    branches:
+      - main
     inputs:
       input1:
         description: 'The first input'
