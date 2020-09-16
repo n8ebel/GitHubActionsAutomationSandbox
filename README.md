@@ -17,6 +17,32 @@ Example repo demonstrating different types of automated tasks and CI integration
 - Danger integration to warn about missing PR description
 - GitHub Actions workflow to check for dependency updates every day at 8:00
 
+## Triggering Workflows
+
+Running the following curl command will trigger 2 different workflows:
+- `triggered_example.yml`
+- `triggerable_tasks.yml`
+
+```
+curl -H "Accept: application/vnd.github.everest-preview+json" \
+    -H "Authorization: token <your-token-here>" \
+    --request POST \
+    --data '{"event_type": "do-something"}' \
+    https://api.github.com/repos/n8ebel/GitHubActionsAutomationSandbox/dispatches
+```
+
+With this command, the `triggerable_tasks.yml` workflow will run, but several of the steps will not run because the repository_dispath event didn't have the required properties passed with it.
+
+To run the full `triggerable_tasks.yml` workflow, run the following curl command:
+
+```
+curl -H "Accept: application/vnd.github.everest-preview+json" \
+    -H "Authorization: token <your-token-here>" \
+    --request POST \
+    --data '{"event_type": "do-something", "client_payload": { "text": "a title"}}' \
+    https://api.github.com/repos/n8ebel/GitHubActionsAutomationSandbox/dispatches
+```
+
 
 ## Resources
 - [Git Hooks to Enforce Code Quality](https://proandroiddev.com/ooga-chaka-git-hooks-to-enforce-code-quality-11ce8d0d23cb)
