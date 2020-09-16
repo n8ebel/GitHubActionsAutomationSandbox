@@ -1,9 +1,9 @@
-name: Greet Contributor
+name: Greet Contributor Workflow
 
 on: [pull_request, issues]
 
 jobs:
-  greeting:
+  greet_first_contribution_job:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/first-interaction@v1

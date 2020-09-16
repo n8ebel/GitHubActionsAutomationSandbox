@@ -1,11 +1,11 @@
-name: Check Dependency Versions
+name: Check Dependency Versions Workflow
 
 on:
   schedule:
     - cron:  '0 8 * * *'
 
 jobs:
-  build:
+  scheduled_dependencies_check_job:
     name: Build, Test & Deploy
     runs-on: ubuntu-latest
     steps:

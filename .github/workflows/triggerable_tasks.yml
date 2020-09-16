@@ -1,10 +1,10 @@
-name: Triggered Tasks
+name: Triggered Dependencies And Test Workflow
 
 on:
   repository_dispatch:
 
 jobs:
-  build:
+  triggered_dependencies_tests_job:
     name: Check Dependencies & Tests
     runs-on: ubuntu-latest
     steps:

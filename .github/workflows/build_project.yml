@@ -1,10 +1,10 @@
-name: Android CI
+name: Android CI Workflow
 
 # Trigger the workflow on push or pull request
 on: pull_request
 
 jobs:
-  build:
+  build_pr_job:
 
     runs-on: ubuntu-latest
 

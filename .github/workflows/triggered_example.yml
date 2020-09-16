@@ -1,4 +1,4 @@
-name: Do Something That Needs Scheduled
+name: Scheduled And Triggerable Workflow
 
 on:
   repository_dispatch:
@@ -7,7 +7,7 @@ on:
     - cron:  '*/5 * * * *'
 
 jobs:
-  build:
+  scheduled_triggered_job:
     name: Run Some Scheduled Thing
     runs-on: ubuntu-latest
     steps:
