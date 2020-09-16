@@ -17,7 +17,7 @@ Example repo demonstrating different types of automated tasks and CI integration
 - Danger integration to warn about missing PR description
 - GitHub Actions workflow to check for dependency updates every day at 8:00
 
-## Triggering Workflows
+## Triggering Repository_Dispatch Workflows
 
 Running the following curl command will trigger 2 different workflows:
 - `triggered_example.yml`
@@ -43,6 +43,30 @@ curl -H "Accept: application/vnd.github.everest-preview+json" \
     https://api.github.com/repos/n8ebel/GitHubActionsAutomationSandbox/dispatches
 ```
 
+## Triggering Workflow_Dispatch Events
+
+Workflows configured to run in response to `workflow_dispatch` events may be triggered in 2 ways:
+- using the GitHub Actions api
+- from the GitHub Actions UI in your repository
+
+To trigger the `workflow_dispatch_example.yml` workflow, the following curl can be used:
+
+```
+curl -H "Accept: application/vnd.github.everest-preview+json" \
+    -H "Authorization: token <your-token-here>" \
+    --request POST \
+    --data '{
+              "ref": "main",
+              "inputs":{
+                "input1":"some value",
+                "input2":"some value 2"
+              }
+            }' \
+    https://api.github.com/repos/n8ebel/GitHubActionsAutomationSandbox/actions/workflows/workflow_dispatch_example.yml/dispatches
+```
+
+- The `ref` input corresponds to the `branch`, `tag`, or `commit` you want the workflow to be run on.
+- The `inputs` input corresponds with the inputs defined in the workflow file, and with what is present in the UI when triggering the workflow from GitHub
 
 ## Resources
 - [Git Hooks to Enforce Code Quality](https://proandroiddev.com/ooga-chaka-git-hooks-to-enforce-code-quality-11ce8d0d23cb)
