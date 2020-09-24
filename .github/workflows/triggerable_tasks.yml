@@ -23,8 +23,8 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - run: |
-        'echo "dependencies: ${{ github.event.client_payload.dependencies }}"'
-        'echo "tests: ${{ github.event.client_payload.tests }}"'
+          echo "dependencies: ${{ github.event.client_payload.dependencies }}"
+          echo "tests: ${{ github.event.client_payload.tests }}"
 
       - name: Check Dependency Versions
         if: github.event.client_payload.dependencies == true
