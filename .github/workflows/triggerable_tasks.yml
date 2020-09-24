@@ -1,6 +1,7 @@
 name: Triggered Dependencies And Test Workflow
 
 on:
+  push:
   repository_dispatch:
 
 jobs:
@@ -9,8 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout
-        uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - run: |
+        'echo "dependencies: ${{ github.event.client_payload.dependencies }}"'
+        'echo "tests: ${{ github.event.client_payload.tests }}"'
 
       - name: Check Dependency Versions
         if: github.event.client_payload.dependencies == true
