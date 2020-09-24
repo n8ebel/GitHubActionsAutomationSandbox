@@ -92,14 +92,11 @@ jobs:
     name: Notify Build Success
     runs-on: ubuntu-latest
     steps:
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@master
-        env:
-          SLACK_CHANNEL: github-actions-demo
-          SLACK_ICON: https://chicagoroboto.com/wp-content/uploads/2019/10/roboto-logo-color.png
-          SLACK_USERNAME: build-pull-request
-          SLACK_TITLE: "View Workflow"
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_MESSAGE: 'https://github.com/n8ebel/GitHubActionsAutomationSandbox/actions/runs/${{ github.run_id }}'
-          SLACK_FOOTER: Enjoy Chicago Roboto!
-          MSG_MINIMAL: true
+      - uses: technote-space/workflow-conclusion-action@v1
+      - uses: 8398a7/action-slack@v3
+          with:
+            status: env.WORKFLOW_CONCLUSION
+            fields: message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required
