@@ -37,7 +37,7 @@ jobs:
 
   android_test_job:
     name: Android Test
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     continue-on-error: true
     steps:
 
@@ -96,7 +96,7 @@ jobs:
           path: app/build/outputs/apk/debug/**.apk
 
   notification_job:
-    needs: [test_job, assemble_job]
+    needs: [test_job,android_test_job,assemble_job]
     name: Notify Build Status
     runs-on: ubuntu-latest
     steps:
