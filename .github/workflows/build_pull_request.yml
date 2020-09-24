@@ -62,7 +62,6 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Run Debug ktlint
-        continue-on-error: true
         run: ./gradlew ktlintDebugCheck --continue
 
       - name: Upload ktlint Reports
@@ -72,7 +71,9 @@ jobs:
           name: ktlint-report
           path: '**/build/reports/ktlint'
 
-      - uses: MeilCli/danger-action@v5
+      - name: Danger
+        if: ${{ always() }}
+        uses: MeilCli/danger-action@v5
         with:
           plugins_file: 'Gemfile'
           install_path: 'vendor/bundle'
