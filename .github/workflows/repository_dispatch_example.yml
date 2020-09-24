@@ -1,7 +1,6 @@
-name: Triggered Dependencies And Test Workflow
+name: Repository Dispatch Example
 
 on:
-  push:
   repository_dispatch:
 
 jobs:

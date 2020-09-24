@@ -1,9 +1,7 @@
-name: Manually Triggered Workflow
+name: Workflow Dispatch Example
 
 on:
   workflow_dispatch:
-    branches:
-      - main
     inputs:
       input1:
         description: 'The first input'

@@ -1,0 +1,5 @@
+name: Build Feature Branch
+
+on:
+  push:
+    branches: 'feature/'
