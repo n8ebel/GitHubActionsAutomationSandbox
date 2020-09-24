@@ -149,6 +149,9 @@ jobs:
         with:
           status: ${{ env.WORKFLOW_CONCLUSION }}
           fields: message,commit,author,ref,workflow # selectable (default: repo,message)
+          icon_url: 'https://chicagoroboto.com/wp-content/uploads/2019/10/roboto-logo-color.png'
+          author_name: "author name"
+          username: "username"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required
