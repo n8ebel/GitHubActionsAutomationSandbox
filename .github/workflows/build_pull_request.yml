@@ -148,8 +148,7 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           status: ${{ env.WORKFLOW_CONCLUSION }}
-          fields: commit,ref,workflow # selectable (default: repo,message)
-          icon_url: 'https://chicagoroboto.com/wp-content/uploads/2019/10/roboto-logo-color.png'
+          fields: commit,ref,workflow,eventName
           author_name: ${{ github.actor }}
           icon_emoji: ':robot_face:'
           username: "Build Status"
