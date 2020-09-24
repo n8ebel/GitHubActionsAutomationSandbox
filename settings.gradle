@@ -1,2 +1,14 @@
+plugins {
+    id "com.gradle.enterprise" version "3.4.1"
+}
+
 include ':app'
 rootProject.name='GitHub Actions Automation Sandbox'
+
+gradleEnterprise {
+    buildScan {
+        termsOfServiceUrl = "https://gradle.com/terms-of-service"
+        termsOfServiceAgree = "yes"
+        publishAlways()
+    }
+}
