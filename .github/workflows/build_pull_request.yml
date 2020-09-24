@@ -95,7 +95,7 @@ jobs:
       - uses: technote-space/workflow-conclusion-action@v1
       - uses: 8398a7/action-slack@v3
         with:
-          status: env.WORKFLOW_CONCLUSION
+          status: ${{ env.WORKFLOW_CONCLUSION }}
           fields: message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
