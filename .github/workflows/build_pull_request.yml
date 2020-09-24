@@ -78,7 +78,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Assemble QADebug
+      - name: Assemble Debug
         run: ./gradlew assembleDebug
 
       - name: Upload APK
@@ -100,4 +100,6 @@ jobs:
           SLACK_USERNAME: build-pull-request
           SLACK_TITLE: "Last Commit"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_FOOTER: Powered by GitHub Actions
+          SLACK_MESSAGE: 'https://github.com/premisedata/mobile-android/actions/runs/${{ github.run_id }}'
+          SLACK_FOOTER: Enjoy Chicago Roboto!
+          MSG_MINIMAL: true
