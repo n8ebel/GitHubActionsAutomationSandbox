@@ -36,6 +36,7 @@ jobs:
   lint_job:
     name: Lint
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
 
       - name: Checkout
@@ -64,6 +65,7 @@ jobs:
   assemble_job:
     name: Assemble
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
 
       - name: Checkout
@@ -97,7 +99,7 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           status: ${{ env.WORKFLOW_CONCLUSION }}
-          fields: message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+          fields: message,commit,author,ref,workflow # selectable (default: repo,message)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required
