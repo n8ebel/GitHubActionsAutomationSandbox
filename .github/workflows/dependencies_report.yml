@@ -1,0 +1,38 @@
+name: Check Dependency Updates
+
+on:
+  schedule:
+    - cron:  '0 0 * * 0'
+
+jobs:
+  check_dependeny_updates_job:
+    name: Check Dependency Updates
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Check Dependency Versions
+        run: ./gradlew dependencyUpdates
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dependencies-report
+          path: build/dependencyUpdates/report.txt
+
+      - uses: technote-space/workflow-conclusion-action@v1
+      - uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ env.WORKFLOW_CONCLUSION }}
+          fields: commit,ref,workflow,eventName
+          author_name: ${{ github.actor }}
+          icon_emoji: ':robot_face:'
+          username: "Dependency Update Report Completed"
+          text: |
+            ${{ env.WORKFLOW_CONCLUSION }}:
+            https://github.com/n8ebel/GitHubActionsAutomationSandbox/actions/runs/${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
