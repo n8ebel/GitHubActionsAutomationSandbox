@@ -98,8 +98,8 @@ jobs:
           SLACK_CHANNEL: github-actions-demo
           SLACK_ICON: https://chicagoroboto.com/wp-content/uploads/2019/10/roboto-logo-color.png
           SLACK_USERNAME: build-pull-request
-          SLACK_TITLE: "Last Commit"
+          SLACK_TITLE: "View Workflow"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_MESSAGE: 'https://github.com/premisedata/mobile-android/actions/runs/${{ github.run_id }}'
+          SLACK_MESSAGE: 'https://github.com/n8ebel/GitHubActionsAutomationSandbox/actions/runs/${{ github.run_id }}'
           SLACK_FOOTER: Enjoy Chicago Roboto!
           MSG_MINIMAL: true
