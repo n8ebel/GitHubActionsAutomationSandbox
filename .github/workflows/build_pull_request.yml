@@ -148,12 +148,12 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           status: ${{ env.WORKFLOW_CONCLUSION }}
-          fields: message,commit,ref,workflow # selectable (default: repo,message)
+          fields: commit,ref,workflow # selectable (default: repo,message)
           icon_url: 'https://chicagoroboto.com/wp-content/uploads/2019/10/roboto-logo-color.png'
           author_name: ${{ github.actor }}
           icon_emoji: ':robot_face:'
           username: "Build Status"
-          text: 'https://github.com/n8ebel/GitHubActionsAutomationSandbox/actions/runs/${{ github.run_id }}'
+          text: '${{ env.WORKFLOW_CONCLUSION }}\nWorkflow https://github.com/n8ebel/GitHubActionsAutomationSandbox/actions/runs/${{ github.run_id }}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required
