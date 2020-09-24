@@ -1,0 +1,23 @@
+name: Echo
+
+on:
+  workflow_dispatch:
+    branches:
+      - main
+    inputs:
+      input1:
+        description: 'The first input'
+        required: true
+        default: 'A default value'
+      input2:
+        description: 'The second input'
+        required: false
+
+jobs:
+  job1:
+    name: Echo Workflow Inputs
+    runs-on: ubuntu-latest
+    steps:
+
+      - run: 'echo "Triggered event input1: ${{ github.event.inputs.input1 }}"'
+      - run: 'echo "Triggered event input2: ${{ github.event.inputs.input2 }}"'
