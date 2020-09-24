@@ -141,7 +141,7 @@ jobs:
 
   notification_job:
     needs: [test_job, code_formatting_job, lint_job, assemble_job]
-    name: Notify Build Success
+    name: Notify Build Status
     runs-on: ubuntu-latest
     steps:
       - uses: technote-space/workflow-conclusion-action@v1
@@ -151,7 +151,7 @@ jobs:
           fields: commit,ref,workflow,eventName
           author_name: ${{ github.actor }}
           icon_emoji: ':robot_face:'
-          username: "Build Status"
+          username: "Pull Request Build Status"
           text: |
             ${{ env.WORKFLOW_CONCLUSION }}:
             https://github.com/n8ebel/GitHubActionsAutomationSandbox/actions/runs/${{ github.run_id }}
