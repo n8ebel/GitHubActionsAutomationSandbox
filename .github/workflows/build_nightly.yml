@@ -1,7 +1,6 @@
 name: Nightly Build
 
 on:
-  push:
   schedule:
     - cron:  '0 0 * * *'
 
