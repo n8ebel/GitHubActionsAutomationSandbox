@@ -22,7 +22,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - run: |
+      - name: Log Inputs
+        run: |
           echo "dependencies: ${{ github.event.client_payload.dependencies }}"
           echo "tests: ${{ github.event.client_payload.tests }}"
 
