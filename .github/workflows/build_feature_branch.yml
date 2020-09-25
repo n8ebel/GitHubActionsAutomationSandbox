@@ -2,4 +2,30 @@ name: Build Feature Branch
 
 on:
   push:
-    branches: 'feature/'
+    branches: 'feature/**'
+
+jobs:
+  assemble_distribute_job:
+    name: Assemble and Upload to Firebase
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Assemble
+        run: ./gradlew assembleDebug
+
+      - name: Upload to Firebase
+        run: ./gradlew appDistributionUploadDebug
