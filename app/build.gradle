@@ -11,8 +11,11 @@ def getVersionCode() {
 }
 
 def getVersionName() {
-    def suffix = System.env.VERSION_CODE != null ? "-${System.env.VERSION_CODE.toString()}" : ""
-    return VERSION_NAME + suffix
+    return VERSION_NAME
+}
+
+def getVersionNameSuffix() {
+    return System.env.VERSION_CODE != null ? "-${System.env.VERSION_CODE.toString()}" : ""
 }
 
 android {
@@ -22,8 +25,9 @@ android {
         applicationId "com.n8ebel.githubactionsautomationsandbox"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode getVersionCode()
-        versionName getVersionName()
+        versionCode(getVersionCode())
+        versionName(getVersionName())
+        versionNameSuffix(getVersionNameSuffix())
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
