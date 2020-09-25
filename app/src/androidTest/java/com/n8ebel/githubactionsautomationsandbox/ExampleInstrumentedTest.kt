@@ -14,12 +14,6 @@ import org.junit.Test
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
-    @Test
-    fun useAppContext_WillFail() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertNotEquals("com.n8ebel.githubactionsautomationsandbox", appContext.packageName)
-    }
 
     @Test
     fun useAppContext() {
