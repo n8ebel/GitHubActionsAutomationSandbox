@@ -27,5 +27,10 @@ jobs:
       - name: Assemble
         run: ./gradlew assembleDebug
 
-      - name: Upload to Firebase
-        run: ./gradlew appDistributionUploadDebug
+      - name: Upload to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.2.1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          token: ${{ secrets.FIREBASE_TOKEN }}
+          groups: qa
+          file: app/build/outputs/apk/debug/app-debug.apk
