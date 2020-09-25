@@ -46,3 +46,4 @@ task clean(type: Delete) {
 }
 
 apply from: 'git-hooks.gradle'
+apply from: 'app-versioning.gradle'

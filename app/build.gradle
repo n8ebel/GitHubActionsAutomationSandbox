@@ -3,21 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 
-def VERSION_NAME = "1.0"
-def DEFAULT_VERSION_CODE = 1
-
-def getVersionCode() {
-    System.env.VERSION_CODE != null ? System.env.VERSION_CODE : DEFAULT_VERSION_CODE
-}
-
-def getVersionName() {
-    return VERSION_NAME
-}
-
-def getVersionNameSuffix() {
-    return System.env.VERSION_CODE != null ? "-${System.env.VERSION_CODE.toString()}" : ""
-}
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -25,9 +10,9 @@ android {
         applicationId "com.n8ebel.githubactionsautomationsandbox"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode getVersionCode()
-        versionName "${getVersionName()}"
-        versionNameSuffix "${getVersionNameSuffix()}"
+        versionCode getUniqueVersionCode()
+        versionName getUserVisibleVersionName()
+        versionNameSuffix getUserVisibleVersionSuffix()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
