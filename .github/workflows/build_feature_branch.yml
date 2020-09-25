@@ -8,7 +8,6 @@ jobs:
   assemble_distribute_job:
     name: Assemble and Upload to Firebase
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
 
       - name: Checkout
@@ -25,6 +24,8 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Assemble
+        env:
+          VERSION_CODE: ${{ github.run_id }}
         run: ./gradlew assembleDebug
 
       - name: Upload to Firebase App Distribution
