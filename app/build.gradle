@@ -25,9 +25,9 @@ android {
         applicationId "com.n8ebel.githubactionsautomationsandbox"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode(getVersionCode())
-        versionName(getVersionName())
-        versionNameSuffix(getVersionNameSuffix())
+        versionCode getVersionCode()
+        versionName "${getVersionName()}"
+        versionNameSuffix "${getVersionNameSuffix()}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
