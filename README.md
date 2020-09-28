@@ -1,5 +1,6 @@
 ![Android CI](https://github.com/n8ebel/GitHubActionsAutomationSandbox/workflows/Android%20CI/badge.svg)
 ![Do Something That Needs Scheduled](https://github.com/n8ebel/GitHubActionsAutomationSandbox/workflows/Do%20Something%20That%20Needs%20Scheduled/badge.svg)
+![Nightly Build](https://github.com/n8ebel/GitHubActionsAutomationSandbox/workflows/Nightly%20Build/badge.svg)
 
 Example repo demonstrating different types of automated tasks and CI integrations
 
