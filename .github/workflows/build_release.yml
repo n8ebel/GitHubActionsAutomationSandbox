@@ -51,10 +51,9 @@ jobs:
          # whatsNewDirectory: distribution/whatsnew
          # mappingFile: app/build/outputs/mapping/release/mapping.txt
 
-      - uses: technote-space/workflow-conclusion-action@v1
       - uses: 8398a7/action-slack@v3
         with:
-          status: ${{ env.WORKFLOW_CONCLUSION }}
+          status: ${{ job.status }}
           fields: commit,ref,workflow,eventName
           author_name: ${{ github.actor }}
           icon_emoji: ':robot_face:'
