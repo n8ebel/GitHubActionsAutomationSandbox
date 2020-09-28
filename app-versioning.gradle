@@ -12,5 +12,8 @@ ext.getUserVisibleVersionName = {
 }
 
 ext.getUserVisibleVersionSuffix = {
-    return System.getenv("VERSION_CODE") != null ? "-${System.getenv("VERSION_CODE")}" : ""
+    def suffix = System.getenv("VERSION_SUFFIX") != null ? "-${System.getenv("VERSION_SUFFIX")}" : ""
+    def code = System.getenv("VERSION_CODE") != null ? "-${System.getenv("VERSION_CODE")}" : ""
+
+    return suffix + code
 }
