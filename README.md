@@ -1,11 +1,9 @@
-![Android CI](https://github.com/n8ebel/GitHubActionsAutomationSandbox/workflows/Android%20CI/badge.svg)
-![Do Something That Needs Scheduled](https://github.com/n8ebel/GitHubActionsAutomationSandbox/workflows/Do%20Something%20That%20Needs%20Scheduled/badge.svg)
 ![Nightly Build](https://github.com/n8ebel/GitHubActionsAutomationSandbox/workflows/Nightly%20Build/badge.svg)
 
 Example repo demonstrating different types of automated tasks and CI integrations
 
 ## Examples Included
-- Simple GitHub Actions build configuration
+- Simple GitHub Actions workflow examples
 - ktlint running in CI
 - Gradle task to copy a pre-push git hook that validates ktlint
 - .gitignore file which allows code styles, scopes, templates, etc to be tracked
@@ -70,6 +68,8 @@ curl -H "Accept: application/vnd.github.everest-preview+json" \
 - The `inputs` input corresponds with the inputs defined in the workflow file, and with what is present in the UI when triggering the workflow from GitHub
 
 ## Resources
+- [GitHub Actions Marketplace](https://github.com/marketplace?type=actions)
+- [GitHub Actions Documentation](https://docs.github.com/en/free-pro-team@latest/actions)
 - [Git Hooks to Enforce Code Quality](https://proandroiddev.com/ooga-chaka-git-hooks-to-enforce-code-quality-11ce8d0d23cb)
 - [Creating a Pull Request Template for Your Repository](https://help.github.com/en/articles/creating-a-pull-request-template-for-your-repository)
 - [Closing GitHub Issues With Keywords](https://help.github.com/en/articles/closing-issues-using-keywords)
