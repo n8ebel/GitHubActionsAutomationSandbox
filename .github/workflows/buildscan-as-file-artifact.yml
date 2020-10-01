@@ -1,0 +1,27 @@
+name: Store Build Scan URL As Artifact
+
+on:
+  push:
+    branches: 'ne/buildscan-recipes'
+
+jobs:
+  assemble_job:
+    name: Assemble
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Assemble
+        id: gradle
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: assembleDebug
+
+      - name: Save Build Scan Log
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: buildscan
+          path: 'buildscan.log'
