@@ -1,0 +1,48 @@
+name: Add Multiple Buildscan PR Comments
+
+on:
+  pull_request:
+    branches: 'ne/buildscan-recipes'
+
+jobs:
+  test_job:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - id: gradle
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: test
+
+      - name: Add Build Scan URL to Pull Request
+        uses: mshick/add-pr-comment@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          message: |
+            **Test job buildscan url for run [${{ github.run_id }}](https://github.com/n8ebel/GitHubActionsAutomationSandbox/actions/runs/${{ github.run_id }})**
+            ${{ steps.gradle.outputs.build-scan-url }}
+
+  assemble:
+    name: Assemble Debug
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - id: gradle
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: assembleDebug
+
+      - name: Add Build Scan URL to Pull Request
+        uses: mshick/add-pr-comment@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          message: |
+            **Assemble job buildscan url for run [${{ github.run_id }}](https://github.com/n8ebel/GitHubActionsAutomationSandbox/actions/runs/${{ github.run_id }})**
+            ${{ steps.gradle.outputs.build-scan-url }}
