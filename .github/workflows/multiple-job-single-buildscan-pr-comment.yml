@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 name: Add Single Buildscan PR Comment for Workflow
+=======
+name: Add Multiple Buildscan PR Comments
+>>>>>>> Add multiple job single comment example
 
 on:
   pull_request:
