@@ -36,7 +36,7 @@ jobs:
           arguments: assembleDebug
 
   notification_job:
-    needs: [test, assemble_job]
+    needs: [test, assemble]
     name: Add Build Scan URLs
     runs-on: ubuntu-latest
     steps:
