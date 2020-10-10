@@ -1,0 +1,49 @@
+name: Add Single Buildscan PR Comment for Workflow
+
+on:
+  pull_request:
+    branches: 'ne/buildscan-recipes'
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    outputs:
+      buildScanUrl: ${{ steps.gradle.outputs.build-scan-url }}
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - id: gradle
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: test
+
+  assemble:
+    name: Assemble Debug
+    runs-on: ubuntu-latest
+    outputs:
+      buildScanUrl: ${{ steps.gradle.outputs.build-scan-url }}
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - id: gradle
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: assembleDebug
+
+  notification_job:
+    needs: [test, assemble_job]
+    name: Add Build Scan URLs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mshick/add-pr-comment@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          message: |
+            **Build scans for run: [${{ github.run_id }}](https://github.com/premisedata/mobile-android/actions/runs/${{ github.run_id }})**
+            * Test Build Scan ${{ needs.test.outputs.buildScanUrl }}
+            * Assemble Build Scan ${{ needs.assemble.outputs.buildScanUrl }}
