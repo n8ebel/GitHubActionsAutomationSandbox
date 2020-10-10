@@ -14,7 +14,9 @@ gradleEnterprise {
         publishAlways()
 
         buildScanPublished { PublishedBuildScan scan ->
-            file("buildscan.log") << "${new Date()} - ${scan.buildScanUri}\n"
+            def scanNamePrefix = System.getenv("BUILDSCAN_FILE_PREFIX") ? "${System.getenv("BUILDSCAN_FILE_PREFIX")}-" : ""
+            def filename =  scanNamePrefix + "buildscan.log"
+            file(filename) << "${new Date()} - ${scan.buildScanUri}\n"
         }
     }
 }
