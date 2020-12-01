@@ -1,0 +1,66 @@
+name: Build Release
+on:
+  release:
+    types: [published]
+
+jobs:
+  assemble_job:
+    name: Assemble
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Assemble Release
+        run: ./gradlew assembleRelease
+
+      #- name: Sign Release
+      #  uses: r0adkll/sign-android-release@v1
+      #  with:
+       #   releaseDirectory: app/build/outputs/apk/release
+      #    signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+      #    alias: ${{ secrets.ALIAS }}
+      #    keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+      #    keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Upload APK to Release
+        uses: skx/github-action-publish-binaries@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: app/build/outputs/apk/release/**.apk
+
+      #- name: Upload to Google Play
+        #uses: r0adkll/upload-google-play@v1
+        #with:
+         # serviceAccountJson: ${{ SERVICE_ACCOUNT_JSON }}
+         # packageName: com.n8ebel.githubactionsautomationsandbox
+         # releaseFile: app/build/outputs/apk/release/app-release-signed.apk
+         # track: internal
+         # whatsNewDirectory: distribution/whatsnew
+         # mappingFile: app/build/outputs/mapping/release/mapping.txt
+
+      - uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: commit,ref,workflow,eventName
+          author_name: ${{ github.actor }}
+          icon_emoji: ':robot_face:'
+          username: "Release Build Status"
+          text: |
+            ${{ env.WORKFLOW_CONCLUSION }}:
+            https://github.com/n8ebel/GitHubActionsAutomationSandbox/actions/runs/${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}

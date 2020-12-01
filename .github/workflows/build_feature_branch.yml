@@ -1,11 +1,8 @@
-name: Workflow Dispatch Example
+name: Build Feature Branch
 
 on:
-  workflow_dispatch:
-    inputs:
-      input1:
-        description: 'Version Suffix'
-        required: false
+  push:
+    branches: 'feature/**'
 
 jobs:
   test_job:
@@ -86,7 +83,6 @@ jobs:
       - name: Assemble
         env:
           VERSION_CODE: ${{ github.run_id }}
-          VERSION_SUFFIX: ${{ github.event.inputs.input1 }}
         run: ./gradlew assembleDebug
 
       - name: Upload to Firebase App Distribution
@@ -109,10 +105,10 @@ jobs:
           fields: commit,ref,workflow,eventName
           author_name: ${{ github.actor }}
           icon_emoji: ':robot_face:'
-          username: "Workflow Dispatch Build Status"
+          username: "Feature Branch Build Status"
           text: |
             ${{ env.WORKFLOW_CONCLUSION }}:
             https://github.com/n8ebel/GitHubActionsAutomationSandbox/actions/runs/${{ github.run_id }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required

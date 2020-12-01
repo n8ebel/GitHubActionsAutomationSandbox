@@ -1,16 +1,14 @@
-name: Workflow Dispatch Example
+name: Nightly Build
 
 on:
-  workflow_dispatch:
-    inputs:
-      input1:
-        description: 'Version Suffix'
-        required: false
+  schedule:
+    - cron:  '0 0 * * *'
 
 jobs:
   test_job:
     name: Test
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
 
       - name: Checkout
@@ -36,9 +34,10 @@ jobs:
           name: test-reports
           path: '**/build/reports/tests/'
 
-  lint_job:
-    name: Lint
-    runs-on: ubuntu-latest
+  android_test_job:
+    name: Android Test
+    runs-on: macos-latest
+    continue-on-error: true
     steps:
 
       - name: Checkout
@@ -54,20 +53,23 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Run Debug Lint
-        run: ./gradlew lintDebug
+      - name: Run Android Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: ./gradlew connectedDebugAndroidTest
 
-      - name: Upload Lint Reports
+      - name: Upload Android Test Reports
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
-          name: lint-report
-          path: '**/build/reports/lint-results-*'
+          name: android-test-reports
+          path: '**/build/reports/androidTests/'
 
-  assemble_distribute_job:
-    needs: [test_job, lint_job]
-    name: Assemble and Upload to Firebase
+  assemble_job:
+    name: Assemble
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
 
       - name: Checkout
@@ -83,22 +85,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Assemble
-        env:
-          VERSION_CODE: ${{ github.run_id }}
-          VERSION_SUFFIX: ${{ github.event.inputs.input1 }}
+      - name: Assemble Debug
         run: ./gradlew assembleDebug
 
-      - name: Upload to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1.2.1
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
         with:
-          appId: ${{ secrets.FIREBASE_APP_ID }}
-          token: ${{ secrets.FIREBASE_TOKEN }}
-          groups: qa
-          file: app/build/outputs/apk/debug/app-debug.apk
+          name: apk
+          path: app/build/outputs/apk/debug/**.apk
 
   notification_job:
-    needs: [test_job, lint_job, assemble_distribute_job]
+    needs: [test_job,android_test_job,assemble_job]
     name: Notify Build Status
     runs-on: ubuntu-latest
     steps:
@@ -109,10 +106,10 @@ jobs:
           fields: commit,ref,workflow,eventName
           author_name: ${{ github.actor }}
           icon_emoji: ':robot_face:'
-          username: "Workflow Dispatch Build Status"
+          username: "Nightly Build Status"
           text: |
             ${{ env.WORKFLOW_CONCLUSION }}:
             https://github.com/n8ebel/GitHubActionsAutomationSandbox/actions/runs/${{ github.run_id }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required

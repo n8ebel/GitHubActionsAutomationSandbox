@@ -1,4 +1,4 @@
-name: Greet Contributor Workflow
+name: Greet First Time Contributors
 
 on: [pull_request, issues]
 
