@@ -1,0 +1,19 @@
+name: Notify PR Approval
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  notify:
+    if: github.event.review.state == 'approved'
+    name: Notify Slack
+    runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: $(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+    steps:
+      - name: Set Current Date
+        id: date
+        run: |
+          echo $PR_NUMBER
+          echo "https://github.com/n8ebel/GitHubActionsAutomationSandbox/pull/${PR_NUMBER}"
