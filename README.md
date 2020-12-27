@@ -15,6 +15,7 @@ Example repo demonstrating different types of automated tasks and CI integration
 - Danger integration to add inline ktlint issue comments
 - Danger integration to warn about missing PR description
 - GitHub Actions workflow to check for dependency updates every day at 8:00
+- GitHub Actions workflow to parse PR number to be used when notifying of PR approval
 
 ## Triggering Repository_Dispatch Workflows
 
