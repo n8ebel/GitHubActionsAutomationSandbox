@@ -12,6 +12,10 @@ on:
           - production
           - qa
           - dev
+      notify:
+        description: 'Should workflow notify team?'
+        required: true
+        type: boolean
 
 
 jobs:
@@ -23,3 +27,8 @@ jobs:
 
       - name: Deploy
         run: echo "Deploying to ${{ github.event.inputs.environment }} environment"
+
+      - name: Notify
+        if: ${{ github.event.inputs.notify }}
+        run: echo "Notifying of ${{ github.event.inputs.environment }} deployment"
+
