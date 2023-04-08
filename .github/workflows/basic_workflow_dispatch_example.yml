@@ -3,32 +3,20 @@ name: Basic Workflow Dispatch Example
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'The environment to deploy to'
+      jdk-list:
+        description: 'JDK version to run against'
         required: true
-        default: 'dev'
-        type: choice
-        options:
-          - production
-          - qa
-          - dev
-      notify:
-        description: 'Should workflow notify team?'
-        required: true
-        type: boolean
+        default: '17'
 
 
 jobs:
-  deploy:
+  build:
+    strategy:
+      matrix:
+        jdk-version: ${{ inputs.jdk-list }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Deploy
-        run: echo "Deploying to ${{ github.event.inputs.environment }} environment"
-
-      - name: Notify
-        if: ${{ github.event.inputs.notify }}
-        run: echo "Notifying of ${{ github.event.inputs.environment }} deployment"
+      - uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.jdk-version }}
 
