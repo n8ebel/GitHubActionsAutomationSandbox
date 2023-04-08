@@ -6,7 +6,12 @@ on:
       environment:
         description: 'The environment to deploy to'
         required: true
-        default: 'production'
+        default: 'dev'
+        type: choice
+        options:
+          - production
+          - qa
+          - dev
 
 
 jobs:
