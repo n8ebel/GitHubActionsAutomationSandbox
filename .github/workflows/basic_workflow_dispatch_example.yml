@@ -2,6 +2,12 @@ name: Basic Workflow Dispatch Example
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'The environment to deploy to'
+        required: true
+        default: 'production'
+
 
 jobs:
   deploy:
@@ -9,3 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Deploy
+        run: echo "Deploying to ${{ github.event.inputs.environment }} environment"
